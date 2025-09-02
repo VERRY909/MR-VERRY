@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR•VERRY | Digital Presence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&family=Exo+2:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            color: #00aaff;
+            text-shadow: 0 0 20px rgba(0, 170, 255, 0.8), 
+                         0 0 40px rgba(0, 170, 255, 0.5),
+                         0 0 60px rgba(0, 170, 255, 0.3);
+            margin-bottom: 1.5rem;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00aaff, transparent);
+            border-radius: 50%;
+        }
+        
+        .subtitle {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 3.5rem;
+            color: #00ccff;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+            letter-spacing: 2px;
+        }
+        
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.8rem 1.5rem;
+            background: linear-gradient(145deg, #001122, #003366);
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(0, 119, 255, 0.6),
+                        inset 0 0 15px rgba(0, 68, 136, 0.6);
+            border: 2px solid #00aaff;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, #00aaff, #0077ff, #00aaff, #0077ff);
+            background-size: 400%;
+            border-radius: 16px;
+            animation: glowing 3s ease-in-out infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 170, 255, 0.9),
+                        inset 0 0 20px rgba(0, 85, 170, 0.8);
+        }
+        
+        .btn i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #00ccff;
+            text-shadow: 0 0 10px rgba(0, 204, 255, 0.7);
+        }
+        
+        .btn-text {
+            font-size: 1.3rem;
+            margin-top: 5px;
+        }
+        
+        .btn-subtext {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+        
+        .footer {
+            margin-top: 5rem;
+            color: #00aaff;
+            font-size: 1rem;
+            text-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 200% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .buttons-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 1.5rem;
+            }
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #00aaff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 8s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <h1 class="logo">MR•VERRY</h1>
+        <p class="subtitle">Connect With My Digital Universe</p>
+        
+        <div class="buttons-container">
+            <a href="https://www.instagram.com/hacked2515?igsh=MTdhd2NwbGZ4a241dg==" class="btn" target="_blank">
+                <i class="fab fa-instagram"></i>
+                <span class="btn-text">Instagram</span>
+                <span class="btn-subtext">@hacked2515</span>
+            </a>
+            
+            <a href="https://darkforums.st/User-XLTV404" class="btn" target="_blank">
+                <i class="fas fa-users"></i>
+                <span class="btn-text">Drak Forums</span>
+                <span class="btn-subtext">User-XLTV404</span>
+            </a>
+            
+            <a href="https://whatsapp.com/channel/0029VbBh2pC3gvWVVsWPw41I" class="btn" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                <span class="btn-text">WhatsApp Channel</span>
+                <span class="btn-subtext">Official Updates</span>
+            </a>
+            
+            <a href="https://t.me/+Nb91qcYUTjpjYjU1" class="btn" target="_blank">
+                <i class="fab fa-telegram"></i>
+                <span class="btn-text">Telegram</span>
+                <span class="btn-subtext">Join Group</span>
+            </a>
+            
+            <a href="https://www.tiktok.com/@xltv404?_t=ZS-8zNWu1qPAtr&_r=1" class="btn" target="_blank">
+                <i class="fab fa-tiktok"></i>
+                <span class="btn-text">TikTok</span>
+                <span class="btn-subtext">@xltv404</span>
+            </a>
+            
+            <a href="https://wa.me/60122461625" class="btn" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                <span class="btn-text">WhatsApp</span>
+                <span class="btn-subtext">Direct Contact</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 MR•VERRY - All Rights Reserved | Digital Presence</p>
+        </div>
+    </div>
+
+    <script>
+        // Matrix background effect with brighter green
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = '01010101010101010101010101010101010101010101010101010101010101010101010101';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff33'; // Bright green
+            ctx.font = `${fontSize}px monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 40);
+        
+        // Update canvas size when window is resized
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random animation duration
+                particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+    </script>
+</body>
+</html>
